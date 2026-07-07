@@ -1,0 +1,12 @@
+.video-player {
+  margin-left: 240px;
+  margin-top: 80px;
+  padding: 20px;
+}
+
+.video-player iframe {
+  width: 100%;
+  max-width: 900px;
+  height: 500px;
+  border-radius: 12px;
+}

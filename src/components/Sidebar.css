@@ -1,0 +1,19 @@
+.sidebar{
+    width:220px;
+    height:100vh;
+    padding:20px;
+    border-right:1px solid #ddd;
+}
+
+.menu-item{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:12px;
+    cursor:pointer;
+}
+
+.menu-item:hover{
+    background:#f2f2f2;
+    border-radius:10px;
+}
