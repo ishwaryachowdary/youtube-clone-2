@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import "./VideoCard.css";
 
 function VideoCard({ video }) {
-  const videoId = video.id.videoId || video.id;
+  const videoId =
+    typeof video.id === "object" ? video.id.videoId : video.id;
 
   return (
     <Link

@@ -1,20 +1,21 @@
 .video-card {
-  width: 300px;
-  margin: 20px;
-  cursor: pointer;
+  width: 320px;
+  text-decoration: none;
+  color: black;
+  margin-bottom: 20px;
 }
 
-.video-card img {
+.thumbnail {
   width: 100%;
-  border-radius: 12px;
+  border-radius: 10px;
 }
 
-.video-card h3 {
-  font-size: 18px;
+.video-info h3 {
+  font-size: 16px;
   margin: 10px 0 5px;
 }
 
-.video-card p {
-  color: gray;
-  margin: 4px 0;
+.video-info p {
+  color: #606060;
+  font-size: 14px;
 }

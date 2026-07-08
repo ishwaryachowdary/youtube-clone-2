@@ -13,6 +13,7 @@ function App() {
     fetchPopularVideos();
   }, []);
 
+  // Fetch Popular Videos
   const fetchPopularVideos = async () => {
     try {
       const response = await fetch(
@@ -20,22 +21,43 @@ function App() {
       );
 
       const data = await response.json();
+
+      if (data.error) {
+        console.log(data.error);
+        return;
+      }
+
       setVideos(data.items || []);
     } catch (error) {
-      console.error(error);
+      console.error("Popular Videos Error:", error);
     }
   };
 
+  // Search Videos
   const searchVideos = async (searchText) => {
     try {
+      if (!searchText.trim()) {
+        fetchPopularVideos();
+        return;
+      }
+
       const response = await fetch(
-        `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${searchText}&type=video&key=${import.meta.env.VITE_YOUTUBE_API_KEY}`
+        `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=20&q=${encodeURIComponent(
+          searchText
+        )}&key=${import.meta.env.VITE_YOUTUBE_API_KEY}`
       );
 
       const data = await response.json();
+
+      if (data.error) {
+        console.log(data.error);
+        alert(data.error.message);
+        return;
+      }
+
       setVideos(data.items || []);
     } catch (error) {
-      console.error(error);
+      console.error("Search Error:", error);
     }
   };
 
