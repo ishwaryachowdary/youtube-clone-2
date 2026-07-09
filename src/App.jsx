@@ -17,13 +17,16 @@ function App() {
   const fetchPopularVideos = async () => {
     try {
       const response = await fetch(
-        `https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=20&regionCode=IN&key=${import.meta.env.VITE_YOUTUBE_API_KEY}`
+        `https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=50&regionCode=IN&key=${import.meta.env.VITE_YOUTUBE_API_KEY}`
       );
 
       const data = await response.json();
 
+      console.log("Popular Videos:", data);
+
       if (data.error) {
         console.log(data.error);
+        alert(data.error.message);
         return;
       }
 
@@ -42,12 +45,15 @@ function App() {
       }
 
       const response = await fetch(
-        `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=20&q=${encodeURIComponent(
+        `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=50&q=${encodeURIComponent(
           searchText
         )}&key=${import.meta.env.VITE_YOUTUBE_API_KEY}`
       );
 
       const data = await response.json();
+
+      console.log("Search Response:", data);
+      console.log("Search Items:", data.items);
 
       if (data.error) {
         console.log(data.error);
@@ -64,12 +70,22 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar searchVideos={searchVideos} />
-      <Sidebar />
 
-      <Routes>
-        <Route path="/" element={<Home videos={videos} />} />
-        <Route path="/video/:id" element={<VideoPlayer />} />
-      </Routes>
+<div className="app">
+  <Sidebar />
+
+  <div className="main-content">
+    <Routes>
+      <Route
+        path="/"
+        element={<Home videos={videos} searchVideos={searchVideos} />}
+      />
+      <Route path="/video/:id" element={<VideoPlayer />} />
+    </Routes>
+  </div>
+</div>
+        
+      
     </BrowserRouter>
   );
 }
