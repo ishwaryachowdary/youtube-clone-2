@@ -10,3 +10,20 @@
     background: white;
     overflow-y: auto;
 }
+/* Mobile */
+@media (max-width: 768px) {
+
+  .sidebar {
+    width: 70px;
+    padding: 10px;
+  }
+
+  .menu-item span {
+    display: none;
+  }
+
+  .menu-item {
+    justify-content: center;
+    margin-bottom: 15px;
+  }
+}

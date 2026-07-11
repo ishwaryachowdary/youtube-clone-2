@@ -56,3 +56,12 @@
   color: gray;
   font-size: 14px;
 }
+@media (max-width: 768px) {
+
+  .home {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 10px;
+  }
+
+}
