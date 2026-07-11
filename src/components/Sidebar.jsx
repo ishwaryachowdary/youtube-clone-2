@@ -3,15 +3,14 @@ import {
   FaFire,
   FaPlayCircle,
   FaHistory,
-  FaThumbsUp
+  FaThumbsUp,
 } from "react-icons/fa";
 
 import "./Sidebar.css";
 
-function Sidebar() {
+function Sidebar({ isOpen }) {
   return (
-    <div className="sidebar">
-
+    <div className={`sidebar ${isOpen ? "active" : ""}`}>
       <div className="menu-item">
         <FaHome />
         <span>Home</span>
@@ -36,7 +35,6 @@ function Sidebar() {
         <FaThumbsUp />
         <span>Liked Videos</span>
       </div>
-
     </div>
   );
 }

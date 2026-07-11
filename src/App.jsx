@@ -5,9 +5,11 @@ import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import Home from "./pages/Home";
 import VideoPlayer from "./pages/VideoPlayer";
+import "./App.css";
 
 function App() {
   const [videos, setVideos] = useState([]);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     fetchPopularVideos();
@@ -53,7 +55,6 @@ function App() {
       const data = await response.json();
 
       console.log("Search Response:", data);
-      console.log("Search Items:", data.items);
 
       if (data.error) {
         console.log(data.error);
@@ -69,23 +70,33 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Navbar searchVideos={searchVideos} />
-
-<div className="app">
-  <Sidebar />
-
-  <div className="main-content">
-    <Routes>
-      <Route
-        path="/"
-        element={<Home videos={videos} searchVideos={searchVideos} />}
+      <Navbar
+        searchVideos={searchVideos}
+        toggleSidebar={() => setSidebarOpen(!sidebarOpen)}
       />
-      <Route path="/video/:id" element={<VideoPlayer />} />
-    </Routes>
-  </div>
-</div>
-        
-      
+
+      <div className="app">
+        <Sidebar isOpen={sidebarOpen} />
+
+        <div className="main-content">
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Home
+                  videos={videos}
+                  searchVideos={searchVideos}
+                />
+              }
+            />
+
+            <Route
+              path="/video/:id"
+              element={<VideoPlayer />}
+            />
+          </Routes>
+        </div>
+      </div>
     </BrowserRouter>
   );
 }
